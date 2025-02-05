@@ -9,6 +9,7 @@ Solution output displaying the sequence of moves.
 
 ## 🛠️ Technologies Used
 Python 3
+
 AIMA-Python (Artificial Intelligence: A Modern Approach)
 
 ## ⚡ How to Use
@@ -52,6 +53,7 @@ Impressão da solução com os movimentos realizados.
 
 ## 🛠️ Tecnologias Utilizadas
 Python 3
+
 AIMA-Python (Artificial Intelligence: A Modern Approach)
 
 ## ⚡ Como Usar
