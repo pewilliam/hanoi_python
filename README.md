@@ -13,19 +13,29 @@ AIMA-Python (Artificial Intelligence: A Modern Approach)
 
 ## ⚡ How to Use
 1️⃣ Clone the AIMA-Python repository (required to import search functions):
+```bash
 git clone https://github.com/aimacode/aima-python.git
+```
 
 2️⃣ Navigate to the cloned folder:
+```
 cd aima-python
+```
 
 3️⃣ Clone this repository inside the aima-python folder:
-git clone https://github.com/your-username/repository-name.git
+```
+git clone https://github.com/pewilliam/hanoi_python.git
+```
 
 4️⃣ Navigate to the project folder:
+```
 cd repository-name
+```
 
 5️⃣ Run the script:
+```
 python solve_hanoi.py
+```
 
 ## 📝 Notes
 The number of disks can be changed in the code (default: num_disks = 6).
@@ -47,19 +57,30 @@ AIMA-Python (Artificial Intelligence: A Modern Approach)
 ## ⚡ Como Usar
 
 1️⃣ Clone o repositório AIMA-Python (necessário para importar as funções de busca):
+```
 git clone https://github.com/aimacode/aima-python.git
+```
 
 2️⃣ Entre na pasta clonada:
+```
 cd aima-python
+```
 
 3️⃣ Clone este repositório dentro da pasta aima-python:
-git clone https://github.com/seu-usuario/nome-do-repositorio.git
+```
+git clone https://github.com/pewilliam/hanoi_python.git
+```
 
 4️⃣ Entre na pasta do projeto:
+```
 cd nome-do-repositorio
+```
 
 5️⃣ Execute o script:
+```
 python solve_hanoi.py
+```
+
 ### 📝 Notas
 O número de discos pode ser alterado no código (por padrão, num_disks = 6).
 Para valores muito altos (como 20 discos), o tempo de execução pode ser muito longo devido à complexidade exponencial do problema.
