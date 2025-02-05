@@ -9,61 +9,64 @@ class TowersOfHanoi(Problem):
         super().__init__(initial, goal)
         self.num_disks = num_disks
         
-        # Pré-computar as ações possíveis
+        # Pre-compute all valid actions
         self._all_actions = tuple((i, j) for i in range(3) for j in range(3) if i != j)
 
     def actions(self, state):
         """
-        Retorna apenas ações válidas usando tuplas pré-computadas
+        Return the list of valid moves from the current state.
         """
         return [(i, j) for i, j in self._all_actions 
                 if state[i] and (not state[j] or state[j][-1] > state[i][-1])]
 
     def result(self, state, action):
         i, j = action
-        new_state = [list(peg) for peg in state]  # Converte para lista mutável
-        new_state[j].append(new_state[i].pop())  # Move o disco
-        return tuple(map(tuple, new_state))  # Converte de volta para tupla
+        new_state = [list(peg) for peg in state]  # Converts to list to modify
+        new_state[j].append(new_state[i].pop())  # Move disk from i to j
+        return tuple(map(tuple, new_state))  # Convert back to tuple of tuples
 
     def goal_test(self, state):
         return state == self.goal
-
+    
     def h(self, node):
         """
-        Heurística: Soma do peso dos discos multiplicado pelo peso da haste onde se encontram.
+        Heuristic function: Calculates a weighted sum based on
+            how far disks are from their goal position.
         """
-        haste_pesos = [4, 2, 0]
-        return sum(disco * haste_pesos[haste] for haste in range(3) for disco in node.state[haste])
+        peg_weights = [4, 2, 0]
+        return sum(disk * peg_weights[peg] for peg in range(3) for disk in node.state[peg])
 
-
-def print_solution(solution):
-    if solution is None:
-        print("Nenhuma solução encontrada!")
+def show_solution(solution):
+    """ Prints the solution steps if found. """
+    if not solution:
+        print("No solution found.")
         return
-    
-    path = solution.path()
-    print("Número de movimentos: ", len(path) - 1)
-    
-    for i, node in enumerate(path):
-        if i > 0:  # Evita verificar node.action para o primeiro nó
-            print(f"Mover disco da haste {node.action[0] + 1} para a haste {node.action[1] + 1}")
-        print("Estado: ", node.state)
-    print("\nSolução completa.")
+
+    steps = solution.path()
+    print(f"Moves required: {len(steps) - 1}")
+
+    for step in steps:
+        if step.action:
+            src, dest = step.action
+            print(f"Move top disk from peg {src + 1} to peg {dest + 1}")
+        print("State:", step.state)
 
 def main():
     num_disks = 7
     problem = TowersOfHanoi(num_disks)
-    
+
     """
-    Usando A* ao invés de breadth_first_tree_search, pois tentei com ela primeiro e o código demorava
-    horrores pra finalizar com 4 discos e de 5 pra cima nem finalizava por estourar a memória.
+    I tried running the search with breadth_first_search (with and without the heuristic to check the results), but it was too slow when setting num_disk to 4
+        and almost reaching 100% memory usage when setting num_disk to 5 or higher.
+    So the A* search was used instead (as suggested on class), providing a much faster solution with good memory usage.
+    Of course, don't abuse the number of disks, as the problem complexity grows exponentially.
     """
     solution = astar_search(problem)
-    
-    if solution:
-        print_solution(solution)
-    else:
-        print("Solução não encontrada.")
 
-if __name__ == '__main__':
+    if solution:
+        show_solution(solution)
+    else:
+        print("Solution not found.")
+
+if __name__ == "__main__":
     main()
